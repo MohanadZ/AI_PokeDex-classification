@@ -29,10 +29,14 @@ def local(pokedex_model, label_class, image_path):
     
     # pre-process the image for classification
     image = cv2.resize(image, (96, 96))
+
+    #cv2.imshow("RESIZED IMAGE", image)
+
     image = image.astype("float") / 255.0
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
-
+    
+    
     # load the trained convolutional neural network and the label
     # binarizer
     print("[INFO] loading network...")
@@ -62,10 +66,7 @@ def local(pokedex_model, label_class, image_path):
     cv2.imshow("Output", output)
     cv2.waitKey(0)
 
-#local(args["model"], args["labelbin"], "examples/charmander_counter.png")
-
-#_label = open("lb.pickle", "rb")
 label_binarizer_path = "lb.pickle"
 model_path = "pokedex.model"
 
-local(model_path, label_binarizer_path, "examples/mewtwo_toy.png")
+local(model_path, label_binarizer_path, "images/squirtle_squad.png")
