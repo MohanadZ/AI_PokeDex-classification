@@ -8,17 +8,6 @@ public class HelloClient : MonoBehaviour
     private HelloRequester _helloRequester;
     public bool SendPack = true;
 
-    void Update()
-    {
-        if (SendPack)
-        {
-            _helloRequester.Continue();
-        } else if (!SendPack)
-        {
-            _helloRequester.Pause();
-        }
-    }
-
     private void Start()
     {
         _helloRequester = new HelloRequester();
@@ -28,5 +17,12 @@ public class HelloClient : MonoBehaviour
     private void OnDestroy()
     {
         _helloRequester.Stop();
+    }
+
+    public void MessageToServer(string imagePath)
+    {
+        _helloRequester.imageMessage = imagePath;
+        _helloRequester.Continue();
+        _helloRequester.Pause();
     }
 }
