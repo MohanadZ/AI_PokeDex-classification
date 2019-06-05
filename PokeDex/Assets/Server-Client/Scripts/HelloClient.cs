@@ -14,15 +14,15 @@ public class HelloClient : MonoBehaviour
         _helloRequester.Start();
     }
 
+    public void MessageToServer(string imagePath)
+    {
+        _helloRequester.imageMessage = imagePath;   //The image file path is saved in a HelloRequester instance attribute
+        _helloRequester.Continue();
+        _helloRequester.Pause();
+    }
+
     private void OnDestroy()
     {
         _helloRequester.Stop();
-    }
-
-    public void MessageToServer(string imagePath)
-    {
-        _helloRequester.imageMessage = imagePath;
-        _helloRequester.Continue();
-        _helloRequester.Pause();
     }
 }

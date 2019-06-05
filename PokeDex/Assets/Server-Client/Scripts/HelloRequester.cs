@@ -4,14 +4,8 @@ using NetMQ.Sockets;
 using UnityEngine;
 using System.Collections.Generic;
 
-///     You can copy this class and modify Run() to suits your needs.
-///     To use this class, you just instantiate, call Start() when you want to start and Stop() when you want to stop.
-
-
 public class HelloRequester : RunAbleThread
 {
-    ///     Stop requesting when Running=false.
-
     public string imageMessage;
     string[] messageFromServer;
     public static List<string> whoIsThatPokemon = new List<string>();
@@ -22,13 +16,14 @@ public class HelloRequester : RunAbleThread
 
         using (RequestSocket client = new RequestSocket())
         {
+            //Port number in the TCP connection
             client.Connect("tcp://localhost:5555");
 
             while (Running)
             {
                 if (Send)
                 {
-                    //string message = client.ReceiveFrameString();
+                    //The image file path is sent over the socket
                     client.SendFrame(imageMessage);
 
                     string message = null;
@@ -43,8 +38,11 @@ public class HelloRequester : RunAbleThread
                     {
                         Debug.Log("Received " + message);
 
+                        //Remove unnecessary characters from the received classification result
+                        //Then split the result where there is a space, and store it in a string array
                         messageFromServer = message.Replace(":", "").Replace("(", "").Replace(")", "").Split(' ');
 
+                        //Add the string array elements to a string list
                         whoIsThatPokemon.AddRange(messageFromServer);
                     }
                 }

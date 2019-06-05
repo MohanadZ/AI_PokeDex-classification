@@ -11,12 +11,6 @@ public class Intro : MonoBehaviour
         StartCoroutine(RemoveText());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator RemoveText()
     {
         yield return new WaitForSeconds(5);
